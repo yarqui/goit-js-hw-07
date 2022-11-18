@@ -26,11 +26,14 @@ const onGalleryItemClick = (e) => {
 
   galleryImageModal.show();
 
-  document.addEventListener("keydown", (e) => {
+  const onCloseModal = (e) => {
     if (e.code === "Escape") {
       galleryImageModal.close();
+      document.removeEventListener("keydown", onCloseModal);
     }
-  });
+  };
+
+  document.addEventListener("keydown", onCloseModal);
 };
 
 galleryRef.addEventListener("click", onGalleryItemClick);
