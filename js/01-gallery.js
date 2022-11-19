@@ -19,20 +19,24 @@ const onGalleryItemClick = (e) => {
 
   const fullsizeImage = e.target.dataset.source;
 
-  const galleryImageModal = basicLightbox.create(`
-  <img src="${fullsizeImage}">
-  `);
-
-  galleryImageModal.show();
-
+  const galleryImageModal = basicLightbox.create(
+    `<img src="${fullsizeImage}">`,
+    {
+      onShow: () => {
+        document.addEventListener("keydown", onCloseModal);
+      },
+      onClose: () => {
+        document.removeEventListener("keydown", onCloseModal);
+      },
+    }
+  );
   const onCloseModal = (e) => {
     if (e.code === "Escape") {
       galleryImageModal.close();
-      document.removeEventListener("keydown", onCloseModal);
     }
   };
 
-  document.addEventListener("keydown", onCloseModal);
+  galleryImageModal.show();
 };
 
 galleryRef.addEventListener("click", onGalleryItemClick);
