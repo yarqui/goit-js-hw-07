@@ -12,9 +12,7 @@ galleryItems.map((item) => {
   galleryRef.insertAdjacentHTML("beforeend", galleryItemMarkup);
 });
 
-const lightbox = new SimpleLightbox(".gallery a", {
+const lightbox = new SimpleLightbox(".gallery__item", {
   captionsData: "alt",
   captionDelay: 250,
 });
-
-lightbox.show();
